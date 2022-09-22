@@ -1,0 +1,58 @@
+---
+title: "My WebSite of a Map"
+author: "Jose Nicolas Molina"
+date: "2022-09-22"
+output: html_document
+---
+
+## Introduction
+
+Web page created using R Markdown, which contains a map made with the Leaflet package. This web page will be hosted on GitHub Pages, RPubs or NeoCities. In turn, this web page contains the date it was created
+
+## Load packages and library
+
+Load Library: knitr, leaflet, dplyr
+
+```{r, echo=FALSE, message=FALSE}
+library(knitr)
+library(leaflet)
+library(dplyr)
+```
+
+## Adding Many Markers
+
+
+```{r, echo=FALSE, message=FALSE,}
+format(Sys.time(), '%B, %d, %Y')
+```
+
+```{r, echo=FALSE}
+my_Town <- leaflet() %>%
+        addTiles() %>%  # Add default OpenStreetMap map tiles
+        addMarkers(lat=40.80125761953062, lng=-73.64989760436987, popup="Roslyn") %>%
+        addMarkers(lat=40.82574383082143,lng=-73.49745531636438, popup="Syosset") %>%
+        addMarkers(lat=40.7560830870518,lng=-73.58677890729642, popup="Wetbury") %>%
+        addMarkers(lat=40.7680470577403,lng=-73.5235578978043, popup="Hickville") %>%
+        addMarkers(lat=40.72598036609894,lng=-73.51335085245678, popup="Levittown") %>%
+        addMarkers(lat=40.729566413146955,lng=-73.79151886423905, popup="Queens") %>%
+        addMarkers(lat= 41.10659219579952,lng=-72.36757155413572, popup="Greenport") %>%
+        addMarkers(lat=40.6778991824025,lng=-73.93972309259694, popup="Brooklyn")
+my_Town
+```
+
+## Mapping Clusters
+
+```{r, echo=FALSE}
+format(Sys.time(), '%B, %d, %Y')
+```
+
+```{r, echo=FALSE}
+set.seed(2022-09-21)
+df <- data.frame(lat=runif(500, min=40.67, max = 40.72 ),
+                 lng=runif(500, min=-74.13, max = -73.79 )) 
+
+df %>%
+        leaflet() %>%
+        addTiles() %>%  
+        addMarkers(clusterOptions = markerClusterOptions()) 
+```
